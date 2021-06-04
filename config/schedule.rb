@@ -20,5 +20,5 @@
 # Learn more: http://github.com/javan/whenever
 
 every 1.minute do
-    runner "RunAvailabilityFetches.perform_later"
+    runner "RunAvailabilityFetchesJob.perform_now"
 end
