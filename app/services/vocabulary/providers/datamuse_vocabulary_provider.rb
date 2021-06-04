@@ -16,4 +16,4 @@ class DatamuseVocabularyProvider
             .select{|item| item['word'].length > ending.length}
             .map{|item| VocabularyItem.new item['word'], item['score']}
     end
-endex
+end
