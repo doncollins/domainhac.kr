@@ -12,6 +12,7 @@ class DatamuseVocabularyProvider
         res = Net::HTTP.get_response(uri)
         items = JSON.parse res.body
         items.select{|item| item['score'] >= @min_score}
+            .select{|item| !item['word'].match(/[^a-z]/)}
             .select{|item| item['word'].length > ending.length}
             .map{|item| VocabularyItem.new item['word'], item['score']}
     end
