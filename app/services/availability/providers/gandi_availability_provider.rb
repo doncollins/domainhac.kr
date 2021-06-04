@@ -19,8 +19,6 @@ class GandiAvailabilityProvider
         data = JSON.parse res.body
 
         data.key?('products') and data['products'].any? do |p| p['status'] == 'available' end
-
-            true
     end
 
     def interval
