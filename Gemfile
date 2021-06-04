@@ -32,7 +32,7 @@ gem 'rexml', '~> 3.2.4'
 
 gem 'pg'
 gem 'whenever'
-gem 'dotenv-rails', groups: [:development, :test]
+gem 'dotenv-rails', groups: [:development, :test, :production]
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
