@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="flex justify-center w-full"
+>
+  <div
+    className="text-blue-500 text-3xl"
+  >
+    <i
+      className="fa fa-spin fa-circle-o-notch"
+    />
+  </div>
+</div>
+`;
