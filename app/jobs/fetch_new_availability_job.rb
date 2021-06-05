@@ -14,7 +14,7 @@ class FetchNewAvailabilityJob < ApplicationJob
     if domain.availability.nil?
       domain.create_availability(available: available)
     else
-      domain.availability.update_attribute(available: available)
+      domain.availability.update_attribute(:available, available)
     end
   end
 end
