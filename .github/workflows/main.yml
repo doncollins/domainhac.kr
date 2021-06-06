@@ -34,5 +34,5 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Push image to Amazon ECR
-        run: docker push ${{ steps.docker-tag.outputs.tag }} --all-tags
+        run: docker push ${{ steps.docker-tag.outputs.tag }}
   
