@@ -1,4 +1,4 @@
-name: Run tests and publish Docker image
+name: Build
 on: push
 jobs:
   build:
@@ -7,7 +7,7 @@ jobs:
     steps:
       - name: Generate Docker image tag
         id: docker-tag
-        run: echo ::set-output name=tag::${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${GITHUB_REF#refs/heads/}
+        run: echo ::set-output name=tag::${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
 
       - name: Checkout
         uses: actions/checkout@v2
