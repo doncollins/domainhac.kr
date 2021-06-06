@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import mockNow from '../test/mockNow';
 import TldCard from './TldCard';
 
-beforeEach(mockNow)
-
 it('renders correctly', () => {
     const tld = {
         id: 1,

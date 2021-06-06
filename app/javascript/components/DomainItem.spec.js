@@ -3,8 +3,6 @@ import renderer from 'react-test-renderer';
 import mockNow from '../test/mockNow';
 import DomainItem from './DomainItem';
 
-beforeEach(mockNow)
-
 it('renders correctly', () => {
     const domain = {
         id: 1,
@@ -16,7 +14,7 @@ it('renders correctly', () => {
         availability: {
             id: 1,
             available: true,
-            updated_at: new Date()
+            updated_at: '2021-06-05T22:14:11+00:00',
         },
     }
 

@@ -1,8 +1,8 @@
-import React  from 'react'
+import React, { forwardRef }  from 'react'
 import DomainItem from './DomainItem'
 import Loading from './Loading'
 
-export default function({ tld, domains, ref }) {
+export default forwardRef(({ tld, domains }, ref) => {
     return (
         <div ref={ref} className="mb-8 w-full">
             <div className="text-4xl font-bold text-blue-500 mb-4 text-center">
@@ -20,4 +20,4 @@ export default function({ tld, domains, ref }) {
             </div>
         </div>
     )
-}
+})
