@@ -4,6 +4,8 @@ import mockNow from '../test/mockNow';
 import DomainItem from './DomainItem';
 
 it('renders correctly', () => {
+    mockNow()
+
     const domain = {
         id: 1,
         label: 'f',

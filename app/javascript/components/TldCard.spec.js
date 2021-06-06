@@ -1,8 +1,11 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
+import mockNow from '../test/mockNow';
 import TldCard from './TldCard';
 
 it('renders correctly', () => {
+    mockNow()
+
     const tld = {
         id: 1,
         label: 'oo',
@@ -16,7 +19,7 @@ it('renders correctly', () => {
             availability: {
                 id: 1,
                 available: true,
-                updated_at: new Date()
+                updated_at: '2021-06-05T22:14:11+00:00',
             },
         },        {
             id: 2,
@@ -25,7 +28,7 @@ it('renders correctly', () => {
             availability: {
                 id: 2,
                 available: false,
-                updated_at: new Date()
+                updated_at: '2021-06-05T22:14:11+00:00',
             },
         }
     ]
