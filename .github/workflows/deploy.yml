@@ -1,0 +1,38 @@
+name: Update ECS task definition
+on:
+  workflow_run:
+    workflows: ['Build']
+    branches: [main, develop]
+    types: [completed]
+
+jobs:
+  update_task: 
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate Docker image tag
+        id: docker-tag
+        run: echo ::set-output name=tag::${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
+
+      - name: Render Amazon ECS task definition
+        id: render-task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: web
+          image: ${{ steps.docker-tag.outputs.tag }}
+
+      - name: Render Amazon ECS task definition
+        id: render-task-definition
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: schedule
+          image: ${{ steps.docker-tag.outputs.tag }}
+
+      - name: Deploy to Amazon ECS service
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.render-task-definition.outputs.task-definition }}
+          service: domainhackr
+          cluster: domainhackr
