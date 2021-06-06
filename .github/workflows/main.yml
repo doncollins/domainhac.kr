@@ -1,25 +1,27 @@
 name: Run tests and publish Docker image
 on: push
-env:
-  DOCKER_TAG: ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.ref }}
 jobs:
   build:
     name: Run tests and publish Docker image
     runs-on: ubuntu-latest
     steps:
+      - name: Generate Docker image tag
+        id: docker-tag
+        run: echo ::set-output name=tag::${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${GITHUB_REF#refs/heads/}
+
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Build Docker image
         uses: docker/build-push-action@v2
         with:
-          tags: ${{ env.DOCKER_TAG }}
+          tags: ${{ steps.docker-tag.outputs.tag }}
 
       - name: Run Ruby tests
-        run: docker run ${{ env.DOCKER_TAG }} bundle exec rake
+        run: docker run ${{ steps.docker-tag.outputs.tag }} bundle exec rake
 
       - name: Run JavaScript tests
-        run: docker run ${{ env.DOCKER_TAG }} npm test
+        run: docker run ${{ steps.docker-tag.outputs.tag }} npm test
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
@@ -32,5 +34,5 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       - name: Push image to Amazon ECR
-        run: docker push ${{ env.DOCKER_TAG }} --all-tags
+        run: docker push ${{ steps.docker-tag.outputs.tag }} --all-tags
   
