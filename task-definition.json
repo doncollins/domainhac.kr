@@ -41,9 +41,7 @@
         "interactive": null,
         "healthCheck": {
           "retries": 3,
-          "command": [
-            "bash -c \"bin/rails s\""
-          ],
+          "command": ["bin/rails", "s"],
           "timeout": 5,
           "interval": 30,
           "startPeriod": null
@@ -94,9 +92,7 @@
         "interactive": null,
         "healthCheck": {
           "retries": 3,
-          "command": [
-            "bash -c \"bundle exec whenever --update-crontab && cron -f\""
-          ],
+          "command": ["bash","-c","bundle exec whenever --update-crontab && cron -f"],
           "timeout": 5,
           "interval": 30,
           "startPeriod": null
