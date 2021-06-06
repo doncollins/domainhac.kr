@@ -42,7 +42,7 @@
         "healthCheck": {
           "retries": 3,
           "command": [
-            "bash -c \"bin/rails s -d\""
+            "bash -c \"bin/rails s\""
           ],
           "timeout": 5,
           "interval": 30,
