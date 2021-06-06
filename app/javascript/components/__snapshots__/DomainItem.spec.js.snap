@@ -33,7 +33,7 @@ exports[`renders correctly 1`] = `
       Updated 
     </span>
     <span>
-      today at 6:14 PM
+      yesterday at 10:14 PM
     </span>
   </div>
 </div>

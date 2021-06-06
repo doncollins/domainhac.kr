@@ -27,6 +27,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
-    "test": "jest"
+    "test": "TZ=UTC jest"
   }
 }
