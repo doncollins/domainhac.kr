@@ -1,6 +1,5 @@
 import React from 'react'
 import renderer from 'react-test-renderer';
-import mockNow from '../test/mockNow';
 import TldCard from './TldCard';
 
 it('renders correctly', () => {
@@ -35,7 +34,5 @@ it('renders correctly', () => {
         <TldCard tld={tld} domains={domains} />
     )
 
-    const tree = component.toJSON()
-
-    expect(tree).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
 })

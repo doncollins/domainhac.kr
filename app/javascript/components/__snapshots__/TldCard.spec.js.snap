@@ -48,7 +48,7 @@ exports[`renders correctly 1`] = `
             Updated 
           </span>
           <span>
-            today at 9:59 PM
+            today at 10:33 PM
           </span>
         </div>
       </div>
@@ -84,7 +84,7 @@ exports[`renders correctly 1`] = `
             Updated 
           </span>
           <span>
-            today at 9:59 PM
+            today at 10:33 PM
           </span>
         </div>
       </div>

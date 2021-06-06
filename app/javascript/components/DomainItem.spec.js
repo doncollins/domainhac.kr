@@ -22,7 +22,5 @@ it('renders correctly', () => {
         <DomainItem domain={domain} />
     )
 
-    const tree = component.toJSON()
-
-    expect(tree).toMatchSnapshot()
+    expect(component.toJSON()).toMatchSnapshot()
 })
