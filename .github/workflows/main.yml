@@ -35,6 +35,7 @@ jobs:
         run: docker push ${{ env.DOCKER_TAG }}
 
   deploy:
+    name: Deploy new task definition to Amazon ECS
     if: ${{ github.ref == 'refs/heads/develop' }}
     needs: build
     runs-on: ubuntu-latest
