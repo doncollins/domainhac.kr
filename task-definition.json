@@ -24,6 +24,14 @@
           {
             "name": "RAILS_SERVE_STATIC_FILES",
             "value": "true"
+          },
+          {
+            "name": "DATABASE_URL",
+            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
+          },
+          {
+            "name": "GANDI_KEY",
+            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
           }
         ],
         "resourceRequirements": null,
@@ -37,7 +45,7 @@
         "memoryReservation": null,
         "volumesFrom": [],
         "stopTimeout": null,
-        "image": null,
+        "image": "{{ DOCKER_TAG_WEB }}",
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,
@@ -75,6 +83,14 @@
           {
             "name": "RAILS_ENV",
             "value": "production"
+          },
+          {
+            "name": "DATABASE_URL",
+            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
+          },
+          {
+            "name": "GANDI_KEY",
+            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
           }
         ],
         "resourceRequirements": null,
@@ -88,7 +104,7 @@
         "memoryReservation": null,
         "volumesFrom": [],
         "stopTimeout": null,
-        "image": null,
+        "image": "{{ DOCKER_TAG_WEB }}",
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,
