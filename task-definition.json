@@ -1,19 +1,22 @@
 {
     "ipcMode": null,
-    "executionRoleArn": null,
+    "executionRoleArn": "arn:aws:iam::{{ AWS_ACCOUNT_NUMBER }}:role/ecsTaskExecutionRole",
     "containerDefinitions": [
       {
         "dnsSearchDomains": null,
         "environmentFiles": null,
         "logConfiguration": null,
-        "entryPoint": null,
         "portMappings": [
           {
             "protocol": "tcp",
             "containerPort": 3000
           }
         ],
-        "command": ["bin/rails", "s"],
+        "entryPoint": [
+          "bash",
+          "-c"
+        ],
+        "command": ["bin/rails s"],
         "linuxParameters": null,
         "cpu": 0,
         "environment": [
@@ -26,12 +29,8 @@
             "value": "true"
           },
           {
-            "name": "DATABASE_URL",
-            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
-          },
-          {
-            "name": "GANDI_KEY",
-            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
+            "name": "REDIS_URL",
+            "value": "redis://redis:6379"
           }
         ],
         "resourceRequirements": null,
@@ -39,7 +38,20 @@
         "dnsServers": null,
         "mountPoints": [],
         "workingDirectory": null,
-        "secrets": null,
+        "secrets": [
+          {
+            "name": "DATABASE_URL",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/DATABASE_URL"
+          },
+          {
+            "name": "GANDI_KEY",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/GANDI_KEY"
+          },
+          {
+            "name": "RAILS_MASTER_KEY",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/RAILS_MASTER_KEY"
+          }
+        ],
         "dockerSecurityOptions": null,
         "memory": 500,
         "memoryReservation": null,
@@ -59,7 +71,7 @@
           "startPeriod": null
         },
         "essential": true,
-        "links": null,
+        "links": ["redis"],
         "hostname": null,
         "extraHosts": null,
         "pseudoTerminal": null,
@@ -74,9 +86,12 @@
         "dnsSearchDomains": null,
         "environmentFiles": null,
         "logConfiguration": null,
-        "entryPoint": null,
         "portMappings": [],
-        "command": ["bash","-c","bundle exec whenever --update-crontab && cron -f"],
+        "entryPoint": [
+          "bash",
+          "-c"
+        ],
+        "command": ["sidekiq"],
         "linuxParameters": null,
         "cpu": 0,
         "environment": [
@@ -85,12 +100,8 @@
             "value": "production"
           },
           {
-            "name": "DATABASE_URL",
-            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
-          },
-          {
-            "name": "GANDI_KEY",
-            "valueFrom": "arn:aws:secretsmanager:{{ AWS_REGION }}:{{ AWS_ARN }}:secret:databaseUrl"
+            "name": "REDIS_URL",
+            "value": "redis://redis:6379"
           }
         ],
         "resourceRequirements": null,
@@ -98,13 +109,71 @@
         "dnsServers": null,
         "mountPoints": [],
         "workingDirectory": null,
-        "secrets": null,
+        "secrets": [
+          {
+            "name": "DATABASE_URL",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/DATABASE_URL"
+          },
+          {
+            "name": "GANDI_KEY",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/GANDI_KEY"
+          },
+          {
+            "name": "RAILS_MASTER_KEY",
+            "valueFrom": "arn:aws:ssm:{{ AWS_REGION }}:{{ AWS_ACCOUNT_NUMBER }}:parameter/domainhackr/prod/RAILS_MASTER_KEY"
+          }
+        ],
         "dockerSecurityOptions": null,
         "memory": 300,
         "memoryReservation": null,
         "volumesFrom": [],
         "stopTimeout": null,
         "image": "{{ DOCKER_TAG_WEB }}",
+        "startTimeout": null,
+        "firelensConfiguration": null,
+        "dependsOn": null,
+        "disableNetworking": null,
+        "interactive": null,
+        "healthCheck": null,
+        "essential": true,
+        "links": ["redis"],
+        "hostname": null,
+        "extraHosts": null,
+        "pseudoTerminal": null,
+        "user": null,
+        "readonlyRootFilesystem": null,
+        "dockerLabels": null,
+        "systemControls": null,
+        "privileged": null,
+        "name": "schedule"
+      },
+      {
+        "dnsSearchDomains": null,
+        "environmentFiles": null,
+        "logConfiguration": null,
+        "portMappings": [
+          {
+            "protocol": "tcp",
+            "containerPort": 6379
+          }
+        ],
+        "entryPoint": null,
+        "command": null,
+        "linuxParameters": null,
+        "cpu": 0,
+        "environment": [],
+        "resourceRequirements": null,
+        "ulimits": null,
+        "dnsServers": null,
+        "mountPoints": [],
+        "workingDirectory": null,
+        "secrets": [],
+        "dockerSecurityOptions": null,
+        "memory": 100,
+        "memoryReservation": null,
+        "volumesFrom": [],
+        "stopTimeout": null,
+        "image": "redis:latest",
         "startTimeout": null,
         "firelensConfiguration": null,
         "dependsOn": null,
@@ -121,7 +190,7 @@
         "dockerLabels": null,
         "systemControls": null,
         "privileged": null,
-        "name": "schedule"
+        "name": "redis"
       }
     ],
     "placementConstraints": [],

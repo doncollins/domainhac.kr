@@ -10,6 +10,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name:
+        run: cat ${{ steps.render-task-definition.outputs.json-file-path }}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
         with:
@@ -57,7 +60,7 @@ jobs:
 
   deploy:
     name: Deploy to ECS
-    if: ${{ github.ref == 'refs/heads/develop' }}
+    if: ${{ github.ref == 'refs/heads/ci' }}
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -76,11 +79,13 @@ jobs:
 
       - name: Render Amazon ECS task definition
         id: render-task-definition
-        uses: ../node_modules/interpolate-strings-in-json
+        uses: doncollins/interpolate-strings-in-json@main
+        with:
+          json-file-path: 'task-definition.json'
         env:
-          DOCKER_TAG_WEB: ${{ env.DOCKER_TAG }}
-          AWS_ARN: ${{ secrets.AWS_ARN }}
+          AWS_ACCOUNT_NUMBER: ${{ secrets.AWS_ACCOUNT_NUMBER }}
           AWS_REGION: ${{ secrets.AWS_REGION }}
+          DOCKER_TAG_WEB: ${{ env.DOCKER_TAG }}
 
       - name: Deploy to Amazon ECS service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
