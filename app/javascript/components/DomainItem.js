@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatRelative } from 'date-fns'
+import { format, formatRelative } from 'date-fns'
 
 export default function({ domain }) {
     const formattedDate = formatRelative(

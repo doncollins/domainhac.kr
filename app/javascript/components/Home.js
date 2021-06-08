@@ -1,18 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import TldCard from './TldCard'
-import Loading from './Loading'
-import fetchTlds from '../services/fetchTlds'
+import React from 'react'
+import ConnectedTldList from './ConnectedTldList'
 
 export default function() {
-    const [tlds, setTlds] = useState(null)
-
-    useEffect(async () => {
-        if (!tlds) {
-            const tlds = await fetchTlds()
-            setTlds(tlds)
-        }
-    }, [tlds])
-
     return (
         <div className="w-full flex flex-col items-center p-4 sm:p-8 text-gray-700">
             <div className="text-4xl sm:text-6xl font-bold mb-1 flex items-end">
@@ -26,13 +15,7 @@ export default function() {
                 <a className="text-blue-500 underline" href="https://api.gandi.net/docs/" target="_blank">Gandi API</a>.
             </div>
 
-            <div className="w-full">
-                {tlds && (
-                    tlds.map(tld => (
-                        <TldCard key={tld.id} tld={tld} />
-                    ))
-                ) || <Loading />}
-            </div>
+            <ConnectedTldList />
         </div>
     )
 }

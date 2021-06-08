@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  className="mb-8 w-full"
+>
+  <div
+    className="text-4xl font-bold text-blue-500 mb-4 text-center"
+  >
+    .
+    oo
+  </div>
+  <div
+    className="flex w-full justify-center"
+  >
+    <div
+      class="flex-grow max-w-xs sm:max-w-md shadow"
+    >
+      <div
+        className="px-2 py-1 w-full flex items-center justify-between bg-gray-100 even:bg-white"
+      >
+        <i
+          className="fa fa-check text-blue-500"
+        />
+        <div
+          className="flex-grow ml-8 sm:ml-2 flex items-center justify-start"
+        >
+          <div
+            className="sm:w-32 text-right"
+          >
+            f
+          </div>
+          <div
+            className="text-blue-500"
+          >
+            .
+          </div>
+          <div>
+            oo
+          </div>
+        </div>
+        <div
+          className="text-xs text-gray-500 flex items-center justify-end sm:w-1/2"
+        >
+          <span
+            class="hidden sm:inline"
+          >
+            Updated 
+          </span>
+          <span>
+            yesterday at 10:14 PM
+          </span>
+        </div>
+      </div>
+      <div
+        className="px-2 py-1 w-full flex items-center justify-between bg-gray-100 even:bg-white"
+      >
+        <i
+          className="fa fa-check text-blue-500"
+        />
+        <div
+          className="flex-grow ml-8 sm:ml-2 flex items-center justify-start"
+        >
+          <div
+            className="sm:w-32 text-right"
+          >
+            b
+          </div>
+          <div
+            className="text-blue-500"
+          >
+            .
+          </div>
+          <div>
+            oo
+          </div>
+        </div>
+        <div
+          className="text-xs text-gray-500 flex items-center justify-end sm:w-1/2"
+        >
+          <span
+            class="hidden sm:inline"
+          >
+            Updated 
+          </span>
+          <span>
+            yesterday at 10:14 PM
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

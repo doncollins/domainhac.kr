@@ -1,17 +1,8 @@
-import React, { useState } from 'react'
-import useScrollIntoViewEffect from '../hooks/useScrollIntoViewEffect'
-import fetchDomains from '../services/fetchDomains'
+import React, { forwardRef }  from 'react'
 import DomainItem from './DomainItem'
 import Loading from './Loading'
 
-export default function({ tld }) {
-    const [domains, setDomains] = useState(null)
-
-    const ref = useScrollIntoViewEffect(async () => {
-        const domains = await fetchDomains({ tld: tld.label })
-        setDomains(domains)
-    })
-
+export default forwardRef(({ tld, domains }, ref) => {
     return (
         <div ref={ref} className="mb-8 w-full">
             <div className="text-4xl font-bold text-blue-500 mb-4 text-center">
@@ -29,4 +20,4 @@ export default function({ tld }) {
             </div>
         </div>
     )
-}
+})
