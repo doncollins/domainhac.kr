@@ -31,7 +31,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 gem 'rexml', '~> 3.2.4'
 
 gem 'pg'
-gem 'whenever'
+gem "sidekiq-cron", "~> 1.1"
 gem 'dotenv-rails', groups: [:development, :test, :production]
 
 group :development, :test do

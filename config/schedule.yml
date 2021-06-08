@@ -1,0 +1,3 @@
+run_availability_fetches:
+  cron: "* * * * *"
+  class: "RunAvailabilityFetchesJob"
