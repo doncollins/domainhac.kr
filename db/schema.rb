@@ -10,13 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_221407) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 2021_06_11_050927) do
 
   create_table "availabilities", force: :cascade do |t|
-    t.bigint "domain_id", null: false
+    t.integer "domain_id", null: false
     t.boolean "available"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_06_04_221407) do
 
   create_table "domains", force: :cascade do |t|
     t.string "label"
-    t.bigint "tld_id", null: false
+    t.integer "tld_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tld_id", "label"], name: "index_domains_on_tld_id_and_label", unique: true
@@ -33,8 +30,8 @@ ActiveRecord::Schema.define(version: 2021_06_04_221407) do
   end
 
   create_table "hacks", force: :cascade do |t|
-    t.bigint "domain_id", null: false
-    t.bigint "phrase_id", null: false
+    t.integer "domain_id", null: false
+    t.integer "phrase_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["domain_id", "phrase_id"], name: "index_hacks_on_domain_id_and_phrase_id", unique: true
