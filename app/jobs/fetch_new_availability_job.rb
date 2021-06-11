@@ -11,12 +11,14 @@ class FetchNewAvailabilityJob < ApplicationJob
   end
 
   def save_availability(domain, available)
-    if domain.availability.nil?
-      domain.create_availability(available: available)
-    else
-      domain.availability.available = available
-      domain.availability.updated_at = Time.now
-      domain.availability.save
+    Availability.transaction do
+      if domain.availability.nil?
+        domain.create_availability(available: available)
+      else
+        domain.availability.available = available
+        domain.availability.updated_at = Time.now
+        domain.availability.save
+      end
     end
   end
 end
